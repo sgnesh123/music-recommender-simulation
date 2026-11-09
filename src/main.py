@@ -11,6 +11,28 @@ You will implement the functions in recommender.py:
 
 from src.recommender import load_songs, recommend_songs
 
+# --- User taste profiles ---
+
+HIGH_ENERGY_POP = {
+    "favorite_genre": "pop",
+    "favorite_mood": "intense",
+    "target_energy": 0.92,
+    "target_valence": 0.78,
+}
+
+CHILL_LOFI = {
+    "favorite_genre": "lofi",
+    "favorite_mood": "chill",
+    "target_energy": 0.38,
+    "target_valence": 0.58,
+}
+
+DEEP_INTENSE_ROCK = {
+    "favorite_genre": "rock",
+    "favorite_mood": "intense",
+    "target_energy": 0.90,
+    "target_valence": 0.40,
+}
 
 def main() -> None:
     songs = load_songs("data/songs.csv") 
