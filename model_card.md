@@ -21,16 +21,20 @@ Prompts:
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
+Think of the recommender as a judge holding a scorecard. It compares every song in the catalog to the listener's taste and hands out up to 10 points. Then it recommends the songs with the highest scores.
 
-Prompts:  
+**What it looks at in each song.** It uses four things: the song's **genre** (like pop or jazz), its **mood** (like happy or chill), its **energy** (how calm or intense it feels), and its **valence** (how positive or gloomy it sounds). Energy and valence are numbers from 0 to 1.
 
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
+**What it knows about the listener.** The listener has a taste profile: a favorite genre, a favorite mood, an ideal energy level, and an ideal valence level.
 
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+**How it hands out points.**
+- **Genre (up to 3 points):** A song in the listener's favorite genre gets all 3 points. A closely related genre, like indie pop for a pop fan, gets half (1.5). Anything else gets 0.
+- **Mood (up to 2 points):** The same idea. An exact mood match earns 2 points. A related mood, like "playful" for someone who wants "happy," earns 1.
+- **Energy (up to 3 points) and valence (up to 2 points):** Here the system rewards songs for being *close* to what the listener wants, not for being higher or lower. If you want medium energy, a medium-energy song scores best, and very calm and very intense songs both lose points. The further a song is from the target, the fewer points it gets.
+
+The label matches (genre and mood) and the sound-based features (energy and valence) are each worth about half the total. Neither side can completely outweigh the other. After every song is scored, the list is sorted from highest to lowest, and the top few are recommended. Each recommendation shows its score and a breakdown of where its points came from, so the listener can see *why* it was picked.
+
+**Changes from the starter logic.** The starter returned the first few songs in the file without scoring them. I added the point system above. I chose four features out of the catalog's attributes and left out tempo, danceability, and acousticness, because they mostly measured the same thing as energy. I added valence, because it was the one feature that told me something new: whether a song feels upbeat or dark. I also added partial credit for related genres and moods, so near-misses aren't treated as total misses.
 
 ---
 
